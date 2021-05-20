@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 require("./auth/google-auth");
 const passport = require("passport");
+const cookieSession = require("cookie-session");
 
 const mongoDB = process.env.MONGO_URI;
 const db = mongoose.connection;
@@ -23,8 +24,16 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_SECRET],
+  })
+);
+
 //passport
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger("dev"));
 app.use(express.json());

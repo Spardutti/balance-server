@@ -9,13 +9,12 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL: "http://localhost:5000/users/success",
-      passReqToCallback: true,
     },
-    (req, accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, done) => {
       //CHECK IF USER EXIST
       User.findOne({ googleId: profile.id }, (err, user) => {
         if (user) {
-          done(null, User);
+          done(null, user);
         } else {
           new User({
             username: profile.displayName,
@@ -30,11 +29,13 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
+  console.log("seralize");
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
+    console.log("deserialize");
     done(err, user);
   });
 });
