@@ -5,20 +5,35 @@ require("dotenv").config();
 
 //GOOGLE LOGIN
 exports.googleLogin = (req, res, next) => {
-  passport.authenticate("google", { scope: ["profile"] })(req, res, next);
+  passport.authenticate("google", { scope: ["profile"], session: false })(
+    req,
+    res,
+    next
+  );
 };
 
 //GOOGLE CALLBACK REDIRECT
-//TODO Close but not finish the function
 exports.googleRedirect = (req, res, next) => {
-  passport.authenticate("google", (req, res, next) => {
-    console.log("here");
-    res.send("hola");
-  });
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    successRedirect: "/token",
+  })(req, res, next);
 };
 
 //LOGOUT
 exports.logout = (req, res, next) => {
   req.logout();
   res.redirect("/");
+};
+
+//GENERATE TOKEN
+exports.jwtoken = (req, res, next) => {
+  if (req.user) {
+    const token = jwt.sign(req.user.toJSON(), process.env.JWT_SECRET, {
+      expiresIn: "60m",
+    });
+    res.json(token);
+  } else {
+    res.redirect("/login");
+  }
 };

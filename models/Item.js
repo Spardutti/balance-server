@@ -3,9 +3,7 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  year: { type: Date, default: new Date().getFullYear() },
-  month: { type: Date, default: new Date().getMonth() },
-  day: { type: Date, default: new Date().getDay() },
+  date: { type: Date, default: new Date(Date.now()) },
   name: String,
   price: Number,
 });

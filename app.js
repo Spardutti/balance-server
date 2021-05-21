@@ -8,6 +8,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 require("./auth/google-auth");
+require("./auth/jwtAuth");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 
@@ -26,7 +27,7 @@ app.set("view engine", "jade");
 
 app.use(
   cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 5000,
     keys: [process.env.COOKIE_SECRET],
   })
 );
