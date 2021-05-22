@@ -6,6 +6,7 @@ const ItemSchema = new Schema({
   date: { type: Date, default: new Date(Date.now()) },
   name: String,
   price: Number,
+  folder: [],
 });
 
 module.exports = mongoose.model("Item", ItemSchema);

@@ -2,23 +2,31 @@ const Item = require("../models/Item");
 const User = require("../models/User");
 
 //CREATE ITEM
-exports.addItem = (req, res, next) => {
-  User.findById(req.params.id, (err, user) => {
+exports.newItem = (req, res, next) => {
+  let item = new Item({
+    name: req.body.name,
+    price: req.body.price,
+    user: req.user,
+    folder: req.body.folder,
+  }).save((err, savedItem) => {
     if (err) return next(err);
-    if (user) {
-      const item = new Item({
-        name: req.body.name,
-        price: req.body.price,
-      });
-      let day = item.date.getDay();
-      let month = item.date.getMonth();
-      let year = item.date.getFullYear();
-      //CHECK FOR YEAR ARRAY
-      if (user.item.indexOf(year) === -1) {
-        user.item.push([year]);
-      }
-      //CHECK FOR MONTH ARRAY
-      res.json({ user });
-    }
+    res.json(savedItem);
+  });
+};
+
+//CURRENT USER ITEMS
+exports.getItems = (req, res, next) => {
+  Item.find({ user: req.user }, (err, result) => {
+    if (err) return next(err);
+    res.json(result);
+  });
+};
+
+//CREATE ITEM FOLDER
+exports.addFolder = (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+    if (err || !user) return next(err);
+    user.item.push(req.body.folderName);
+    res.json(user);
   });
 };

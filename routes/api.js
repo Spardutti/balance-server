@@ -25,6 +25,13 @@ router.get("/token", userContoller.jwtoken);
 
 /***************************** ITEM ROUTES */
 
-router.get("/add/:id", itemController.addItem);
+// ADD ITEM FOLDER TO CURRENT USER
+router.get("/add/folder/:id", jwtProtected, itemController.addFolder);
+
+// ADD ITEMS TO CURRENT USER
+router.post("/add/:id", jwtProtected, itemController.newItem);
+
+//GET CURRENT USER ITEMS
+router.get("/get/:id", jwtProtected, itemController.getItems);
 
 module.exports = router;
