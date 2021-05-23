@@ -32,8 +32,8 @@ exports.jwtoken = (req, res, next) => {
     const token = jwt.sign(req.user.toJSON(), process.env.JWT_SECRET, {
       expiresIn: "60m",
     });
-    res.json(token);
+    res.redirect("http://localhost:3000/#/token?token=" + token);
   } else {
-    res.redirect("/login");
+    res.json("no token");
   }
 };

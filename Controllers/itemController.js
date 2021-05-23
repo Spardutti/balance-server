@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 //CREATE ITEM
 exports.newItem = (req, res, next) => {
-  let item = new Item({
+  new Item({
     name: req.body.name,
     price: req.body.price,
     user: req.user,
