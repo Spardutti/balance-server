@@ -7,9 +7,7 @@ const passport = require("passport");
 const jwtProtected = passport.authenticate("jwt", { session: false });
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.json(req.user);
-});
+router.get("/user/:id", jwtProtected, userContoller.currentUser);
 
 // GOOGLE LOGIN
 router.get("/google/login", userContoller.googleLogin);
