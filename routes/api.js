@@ -27,6 +27,6 @@ router.get("/token", userContoller.jwtoken);
 router.post("/add/:id", jwtProtected, itemController.newItem);
 
 //GET CURRENT USER ITEMS
-router.get("/get/:id", jwtProtected, itemController.getItems);
+router.get("/items/:id", jwtProtected, itemController.getItems);
 
 module.exports = router;

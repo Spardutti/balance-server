@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  date: { type: Date, default: new Date(Date.now()) },
+  year: { type: String, default: new Date().getFullYear() },
+  month: {
+    type: String,
+    default: new Date().toLocaleString("default", { month: "long" }),
+  },
+  day: { type: String, default: new Date().getDay() },
   name: String,
   price: Number,
   folder: [],
