@@ -29,4 +29,7 @@ router.post("/add/:id", jwtProtected, itemController.newItem);
 //GET CURRENT USER ITEMS
 router.get("/items/:id", jwtProtected, itemController.getItems);
 
+//
+router.get("/f", itemController.filterItems);
+
 module.exports = router;

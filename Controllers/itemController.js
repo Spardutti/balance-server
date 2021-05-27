@@ -1,6 +1,5 @@
 const Item = require("../models/Item");
 const User = require("../models/User");
-const Year = require("../models/Year");
 
 //CREATE ITEM
 exports.newItem = (req, res, next) => {
@@ -31,4 +30,18 @@ exports.addFolder = (req, res, next) => {
     user.item.push(req.body.folderName);
     res.json(user);
   });
+};
+
+//FIND ITEMS BY MONTH AND YEAR
+exports.filterItems = (req, res, next) => {
+  Item.find(
+    {
+      $and: [
+        { month: req.body.month, year: req.body.year, price: req.body.price },
+      ],
+    },
+    (err, result) => {
+      res.json(result);
+    }
+  );
 };
