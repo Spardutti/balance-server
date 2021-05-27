@@ -1,5 +1,6 @@
 const Item = require("../models/Item");
 const User = require("../models/User");
+const Year = require("../models/Year");
 
 //CREATE ITEM
 exports.newItem = (req, res, next) => {
@@ -8,6 +9,7 @@ exports.newItem = (req, res, next) => {
     price: req.body.price,
     user: req.user,
     folder: req.body.folder,
+    year: Year,
   }).save((err, savedItem) => {
     if (err) return next(err);
     res.json(savedItem);
