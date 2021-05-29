@@ -26,10 +26,14 @@ router.get("/token", userContoller.jwtoken);
 // ADD ITEMS TO CURRENT USER
 router.post("/add/:id", jwtProtected, itemController.newItem);
 
-//GET CURRENT USER ITEMS
-router.get("/items/:id", jwtProtected, itemController.getItems);
+//GET ITEMS OF CURRENT YEAR AND MONTH
+router.get(
+  "/user/items/current",
+  jwtProtected,
+  itemController.getItemsByMonthYear
+);
 
-//
-router.get("/f", itemController.filterItems);
+//GET ITEM YEARS
+router.get("/user/items/year", jwtProtected, itemController.getYears);
 
 module.exports = router;

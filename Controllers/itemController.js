@@ -8,7 +8,6 @@ exports.newItem = (req, res, next) => {
     price: req.body.price,
     user: req.user,
     folder: req.body.folder,
-    year: Year,
   }).save((err, savedItem) => {
     if (err) return next(err);
     res.json(savedItem);
@@ -32,16 +31,29 @@ exports.addFolder = (req, res, next) => {
   });
 };
 
-//FIND ITEMS BY MONTH AND YEAR
-exports.filterItems = (req, res, next) => {
+// GET ALL YEARS THAT ARE NOT EMPTY
+exports.getYears = (req, res, next) => {
+  let years = [];
+  Item.find({ user: req.user }, (err, items) => {
+    if (err) return next(err);
+    items.forEach((item) => {
+      if (years.indexOf(item.year) === -1) {
+        years.push(item.year);
+      }
+    });
+    res.json(years);
+  });
+};
+
+// GET ITEMS FROM THE SPECIFIED YEAR AND MONTH
+exports.getItemsByMonthYear = (req, res, next) => {
   Item.find(
     {
-      $and: [
-        { month: req.body.month, year: req.body.year, price: req.body.price },
-      ],
+      $and: [{ user: req.user, year: req.body.year, month: req.body.month }],
     },
-    (err, result) => {
-      res.json(result);
+    (err, items) => {
+      if (err) return next(err);
+      res.json(items);
     }
   );
 };
