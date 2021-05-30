@@ -28,12 +28,19 @@ router.post("/add/:id", jwtProtected, itemController.newItem);
 
 //GET ITEMS OF CURRENT YEAR AND MONTH
 router.get(
-  "/user/items/current",
+  "/user/items/current/:year/:month",
   jwtProtected,
-  itemController.getItemsByMonthYear
+  itemController.getCurrentMonthYearData
 );
 
 //GET ITEM YEARS
 router.get("/user/items/year", jwtProtected, itemController.getYears);
+
+// GET MONTHS FROM YEAR
+router.get(
+  "/user/items/year/:year",
+  jwtProtected,
+  itemController.getCurrentYearMonths
+);
 
 module.exports = router;

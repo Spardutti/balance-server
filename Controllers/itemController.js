@@ -46,14 +46,31 @@ exports.getYears = (req, res, next) => {
 };
 
 // GET ITEMS FROM THE SPECIFIED YEAR AND MONTH
-exports.getItemsByMonthYear = (req, res, next) => {
+exports.getCurrentMonthYearData = (req, res, next) => {
+  let year = req.params.year;
+  let month = req.params.month;
   Item.find(
     {
-      $and: [{ user: req.user, year: req.body.year, month: req.body.month }],
+      $and: [{ user: req.user, year, month }],
     },
     (err, items) => {
       if (err) return next(err);
       res.json(items);
     }
   );
+};
+
+//GET ALL THE MONTHS THAT BELONG TO THE YEAR
+exports.getCurrentYearMonths = (req, res, next) => {
+  let year = req.params.year;
+  let months = [];
+  Item.find({ $and: [{ user: req.user, year }] }, (err, items) => {
+    if (err) return next(err);
+    items.forEach((item) => {
+      if (months.indexOf(item.month) === -1) {
+        months.push(item.month);
+      }
+    });
+    res.json(months);
+  });
 };
