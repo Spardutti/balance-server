@@ -11,7 +11,7 @@ const ItemSchema = new Schema({
   day: { type: String, default: new Date().getDay() },
   name: String,
   price: Number,
-  folder: [],
+  folder: { type: Schema.Types.ObjectId, ref: "Folder" },
 });
 
 module.exports = mongoose.model("Item", ItemSchema);

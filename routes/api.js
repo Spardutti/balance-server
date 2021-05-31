@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const userContoller = require("../Controllers/userController");
 const itemController = require("../Controllers/itemController");
+const folderController = require("../Controllers/folderController");
 const passport = require("passport");
 
 const jwtProtected = passport.authenticate("jwt", { session: false });
@@ -42,5 +43,13 @@ router.get(
   jwtProtected,
   itemController.getCurrentYearMonths
 );
+
+/************************************* FOLDER ROUTES */
+
+// CREATE NEW FOLDER
+router.post("/user/folder/add", jwtProtected, folderController.addFolder);
+
+//GET CURRENT USER FOLDERS
+router.get("/user/pizza", jwtProtected, folderController.f);
 
 module.exports = router;
