@@ -29,17 +29,17 @@ router.post("/add/:id", jwtProtected, itemController.newItem);
 
 //GET ITEMS OF CURRENT YEAR AND MONTH
 router.get(
-  "/user/items/current/:year/:month",
+  "/items/current/:year/:month",
   jwtProtected,
   itemController.getCurrentMonthYearData
 );
 
 //GET ITEM YEARS
-router.get("/user/items/year", jwtProtected, itemController.getYears);
+router.get("/items/year", jwtProtected, itemController.getYears);
 
 // GET MONTHS FROM YEAR
 router.get(
-  "/user/items/year/:year",
+  "/items/year/:year",
   jwtProtected,
   itemController.getCurrentYearMonths
 );
@@ -47,9 +47,11 @@ router.get(
 /************************************* FOLDER ROUTES */
 
 // CREATE NEW FOLDER
-router.post("/user/folder/add", jwtProtected, folderController.addFolder);
+router.post("/folder/add", jwtProtected, folderController.addFolder);
+
+//TODO user/something gives error find out why
 
 //GET CURRENT USER FOLDERS
-router.get("/user/pizza", jwtProtected, folderController.f);
+router.get("/folders", jwtProtected, folderController.getFolders);
 
 module.exports = router;

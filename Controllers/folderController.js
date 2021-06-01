@@ -18,6 +18,9 @@ exports.addFolder = (req, res, next) => {
 };
 
 // GET CURRENT USER FOLDERS
-exports.f = (req, res, next) => {
-  res.json("Hoal");
+exports.getFolders = (req, res, next) => {
+  Folder.find({ user: req.user }, (err, folders) => {
+    if (err) return next(err);
+    res.json(folders);
+  });
 };
