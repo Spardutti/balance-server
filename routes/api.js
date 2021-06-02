@@ -49,8 +49,6 @@ router.get(
 // CREATE NEW FOLDER
 router.post("/folder/add", jwtProtected, folderController.addFolder);
 
-//TODO user/something gives error find out why
-
 //GET CURRENT USER FOLDERS
 router.get("/folders", jwtProtected, folderController.getFolders);
 
