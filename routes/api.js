@@ -52,4 +52,11 @@ router.post("/folder/add", jwtProtected, folderController.addFolder);
 //GET CURRENT USER FOLDERS
 router.get("/folders", jwtProtected, folderController.getFolders);
 
+// GET ITEMS FROM SPECIFIC FOLDER
+router.get(
+  "/folder/:id/:year/:month",
+  jwtProtected,
+  folderController.folderItems
+);
+
 module.exports = router;

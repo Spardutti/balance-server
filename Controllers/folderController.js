@@ -1,4 +1,5 @@
 const Folder = require("../models/Folder");
+const Item = require("../models/Item");
 
 // CREATE A NEW FOLDER
 exports.addFolder = (req, res, next) => {
@@ -23,4 +24,22 @@ exports.getFolders = (req, res, next) => {
     if (err) return next(err);
     res.json(folders);
   });
+};
+
+// GET ITEMS FROM SPECIFIC FOLDER
+exports.folderItems = (req, res, next) => {
+  Item.find({
+    $and: [
+      {
+        folder: req.params.id,
+        year: req.params.year,
+        month: req.params.month,
+      },
+    ],
+  })
+    .populate("folder")
+    .exec((err, results) => {
+      if (err) return next(err);
+      res.json(results);
+    });
 };
