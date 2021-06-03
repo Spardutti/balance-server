@@ -14,14 +14,6 @@ exports.newItem = (req, res, next) => {
   });
 };
 
-//CURRENT USER ITEMS
-exports.getItems = (req, res, next) => {
-  Item.find({ user: req.user }, (err, result) => {
-    if (err) return next(err);
-    res.json(result);
-  });
-};
-
 //CREATE ITEM FOLDER
 exports.addFolder = (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
@@ -49,15 +41,14 @@ exports.getYears = (req, res, next) => {
 exports.getCurrentMonthYearData = (req, res, next) => {
   let year = req.params.year;
   let month = req.params.month;
-  Item.find(
-    {
-      $and: [{ user: req.user, year, month }],
-    },
-    (err, items) => {
+  Item.find({
+    $and: [{ user: req.user, year, month }],
+  })
+    .populate("folder")
+    .exec((err, items) => {
       if (err) return next(err);
       res.json(items);
-    }
-  );
+    });
 };
 
 //GET ALL THE MONTHS THAT BELONG TO THE YEAR
