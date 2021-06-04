@@ -23,7 +23,7 @@ exports.googleRedirect = (req, res, next) => {
 //LOGOUT
 exports.logout = (req, res, next) => {
   req.logout();
-  res.redirect("http://localhost:3000/");
+  res.redirect("https://infinite-woodland-48479.herokuapp.com/");
 };
 
 //GENERATE TOKEN
@@ -32,7 +32,9 @@ exports.jwtoken = (req, res, next) => {
     const token = jwt.sign(req.user.toJSON(), process.env.JWT_SECRET, {
       expiresIn: "60m",
     });
-    res.redirect("http://localhost:3000/#/logged?token=" + token);
+    res.redirect(
+      "https://infinite-woodland-48479.herokuapp.com/#/logged?token=" + token
+    );
   } else {
     res.json("no token");
   }
