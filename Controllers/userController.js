@@ -33,7 +33,7 @@ exports.jwtoken = (req, res, next) => {
       expiresIn: "60m",
     });
     res.redirect(
-      "https://infinite-woodland-48479.herokuapp.com/#/logged?token=" + token
+      "https://infinite-woodland-48479.herokuapp.com/logged?token=" + token
     );
   } else {
     res.json("no token");
