@@ -44,6 +44,9 @@ router.get(
   itemController.getCurrentYearMonths
 );
 
+// REMOVE SPECIFIC ITEM
+router.delete("/item/delete/:id", jwtProtected, itemController.deleteItem);
+
 /************************************* FOLDER ROUTES */
 
 // CREATE NEW FOLDER

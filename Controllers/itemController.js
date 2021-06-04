@@ -65,3 +65,11 @@ exports.getCurrentYearMonths = (req, res, next) => {
     res.json(months);
   });
 };
+
+// DELETE SPECIFIC ITEM
+exports.deleteItem = (req, res, next) => {
+  Item.findByIdAndRemove(req.params.id, (err, item) => {
+    if (err) return next(err);
+    res.json("deleted");
+  });
+};
