@@ -48,6 +48,11 @@ exports.folderItems = (req, res, next) => {
 exports.deleteFolder = (req, res, next) => {
   Folder.findByIdAndRemove(req.params.id, (err, folder) => {
     if (err) return next(err);
-    res.json("deleted folder");
+    Item.find({ folder: folder.name }, (items) => {
+      if (items) return res.json(items);
+      else {
+        res.json("deleted folder");
+      }
+    });
   });
 };
