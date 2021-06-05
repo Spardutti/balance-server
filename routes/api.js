@@ -63,10 +63,6 @@ router.get(
 );
 
 // DELETE FOLDER
-router.delete(
-  "/delete/folder/:folder",
-  jwtProtected,
-  folderController.deleteFolder
-);
+router.get("/item/folder/:folder", jwtProtected, folderController.deleteFolder);
 
 module.exports = router;
