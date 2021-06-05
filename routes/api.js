@@ -62,7 +62,14 @@ router.get(
   folderController.folderItems
 );
 
-// DELETE FOLDER
+// CHECK IF FOLDER IS EMTPY
 router.get("/item/folder/:folder", jwtProtected, folderController.itemByFolder);
+
+// DELETE FOLDER
+router.delete(
+  "/folder/delete/:id",
+  jwtProtected,
+  folderController.deleteFolder
+);
 
 module.exports = router;

@@ -44,10 +44,18 @@ exports.folderItems = (req, res, next) => {
     });
 };
 
-//DELETE FOLDER
+//CHECK IF FODLER IS EMPTY BEFORE DELETING
 exports.itemByFolder = (req, res, next) => {
   Item.find({ folder: req.params.folder }, (err, items) => {
     if (err) return next(err);
     res.json(items);
+  });
+};
+
+// DELETE FOLDER
+exports.deleteFolder = (req, res, next) => {
+  Folder.findByIdAndRemove(req.params.id, (err, folder) => {
+    if (err) res.json(err);
+    res.json("deleted");
   });
 };
