@@ -62,4 +62,11 @@ router.get(
   folderController.folderItems
 );
 
+// DELETE FOLDEr
+router.delete(
+  "/delete/folder/:id",
+  jwtProtected,
+  folderController.deleteFolder
+);
+
 module.exports = router;
