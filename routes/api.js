@@ -29,7 +29,7 @@ router.post("/add/:id", jwtProtected, itemController.newItem);
 
 //GET ITEMS OF CURRENT YEAR AND MONTH
 router.get(
-  "/items/current/:year/:month",
+  "/items/current/:year/:month/:user",
   jwtProtected,
   itemController.getCurrentMonthYearData
 );
