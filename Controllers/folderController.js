@@ -46,13 +46,9 @@ exports.folderItems = (req, res, next) => {
 
 //DELETE FOLDER
 exports.deleteFolder = (req, res, next) => {
-  Folder.findByIdAndRemove(req.params.id, (err, folder) => {
+  Item.find({ folder: req.params.folder }, (err, item) => {
     if (err) return next(err);
-    Item.find({ folder: folder.name }, (items) => {
-      if (items) return res.json(items);
-      else {
-        res.json("deleted folder");
-      }
-    });
+    if (item) res.error("cant delete folder");
+    else res.json("deleted");
   });
 };
