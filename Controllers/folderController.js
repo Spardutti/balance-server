@@ -46,7 +46,7 @@ exports.folderItems = (req, res, next) => {
 
 //DELETE FOLDER
 exports.itemByFolder = (req, res, next) => {
-  item.find({ folder: req.params.folder }, (err, items) => {
+  Item.find({ folder: req.params.folder }, (err, items) => {
     if (err) return next(err);
     if (items) res.json(items);
     else res.json("no items");
