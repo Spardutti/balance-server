@@ -48,6 +48,7 @@ exports.folderItems = (req, res, next) => {
 exports.itemByFolder = (req, res, next) => {
   item.find({ folder: req.params.folder }, (err, items) => {
     if (err) return next(err);
-    res.json(items);
+    if (items) res.json(items);
+    else res.json("no items");
   });
 };
