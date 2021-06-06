@@ -41,9 +41,8 @@ exports.getYears = (req, res, next) => {
 exports.getCurrentMonthYearData = (req, res, next) => {
   let year = req.params.year;
   let month = req.params.month;
-  let user = req.params.user;
   Item.find({
-    $and: [{ user, year, month }],
+    $and: [{ user: req.user, year, month }],
   })
     .populate("folder")
     .exec((err, items) => {
