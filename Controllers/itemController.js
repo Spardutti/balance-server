@@ -81,6 +81,9 @@ exports.editItem = (req, res, next) => {
     if (item) {
       (item.name = req.body.name), (item.price = req.body.price);
     }
-    res.json(item);
+    item.save((err) => {
+      if (err) return next(err);
+      res.json(item);
+    });
   });
 };
