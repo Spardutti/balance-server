@@ -35,7 +35,7 @@ exports.jwtoken = (req, res, next) => {
     });
     res.redirect(
       //"https://spardutti.github.io/balance-client/#/logged?token=" + token
-      "http://localhost:3000/#/logedd?token=" + token
+      "http://localhost:3000/#/logged?token=" + token
     );
   } else {
     res.json("no token");
