@@ -51,7 +51,7 @@ exports.getCurrentMonthYearData = (req, res, next) => {
     });*/
   Item.find({ user: req.user }, (err, result) => {
     if (err) return next(err);
-    res.json(items);
+    res.json(result);
   });
 };
 
