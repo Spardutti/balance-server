@@ -41,18 +41,14 @@ exports.getYears = (req, res, next) => {
 exports.getCurrentMonthYearData = (req, res, next) => {
   let year = req.params.year;
   let month = req.params.month;
-  /* Item.find({
+  Item.find({
     $and: [{ user: req.user, year, month }],
   })
     .populate("folder")
     .exec((err, items) => {
       if (err) return next(err);
       res.json(items);
-    });*/
-  Item.find({ user: req.user }, (err, result) => {
-    if (err) return next(err);
-    res.json(result);
-  });
+    });
 };
 
 //GET ALL THE MONTHS THAT BELONG TO THE YEAR
