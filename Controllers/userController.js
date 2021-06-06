@@ -23,7 +23,8 @@ exports.googleRedirect = (req, res, next) => {
 //LOGOUT
 exports.logout = (req, res, next) => {
   req.logout();
-  res.redirect("https://spardutti.github.io/balance-client/#/");
+  //res.redirect("https://spardutti.github.io/balance-client/#/");
+  res.redirect("http://localhost:3000/#/");
 };
 
 //GENERATE TOKEN
@@ -33,7 +34,8 @@ exports.jwtoken = (req, res, next) => {
       expiresIn: "60m",
     });
     res.redirect(
-      "https://spardutti.github.io/balance-client/#/logged?token=" + token
+      //"https://spardutti.github.io/balance-client/#/logged?token=" + token
+      "http://localhost:3000/#/logedd?token=" + token
     );
   } else {
     res.json("no token");
