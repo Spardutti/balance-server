@@ -47,6 +47,9 @@ router.get(
 // REMOVE SPECIFIC ITEM
 router.delete("/item/delete/:id", jwtProtected, itemController.deleteItem);
 
+//EDIT SPECIFIC ITEM
+router.edit("/item/edit/:id", jwtProtected, itemController.editItem);
+
 /************************************* FOLDER ROUTES */
 
 // CREATE NEW FOLDER

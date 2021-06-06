@@ -73,3 +73,14 @@ exports.deleteItem = (req, res, next) => {
     res.json("deleted");
   });
 };
+
+// EDIT ITEM
+exports.editItem = (req, res, next) => {
+  Item.findById(req.params.id, (err, item) => {
+    if (err) return next(err);
+    if (item) {
+      (item.name = req.body.name), (item.price = req.body.price);
+    }
+    res.json(item);
+  });
+};
