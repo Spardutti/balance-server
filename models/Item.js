@@ -8,7 +8,7 @@ const ItemSchema = new Schema({
     type: String,
     default: new Date().toLocaleString("default", { month: "long" }),
   },
-  day: { type: String, default: new Date().getDay() },
+  day: { type: String, default: new Date().getDate() },
   name: String,
   price: Number,
   folder: { type: Schema.Types.ObjectId, ref: "Folder" },
