@@ -49,3 +49,15 @@ exports.currentUser = (req, res, next) => {
     res.json(user);
   });
 };
+
+// SET FIRST VISIT TO FALSE
+exports.hideWelcome = (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+    if (err) return next(err);
+    user.firstVisit = false;
+    user.save((err) => {
+      if (err) return next(err);
+      res.json(User);
+    });
+  });
+};

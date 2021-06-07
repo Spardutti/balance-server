@@ -22,6 +22,9 @@ router.get("/logout", userContoller.logout);
 // TOKEN GENERATOR
 router.get("/token", userContoller.jwtoken);
 
+// SET FIRST VISIT TO FALSE
+router.post("/user/:id", jwtProtected, userContoller.hideWelcome);
+
 /***************************** ITEM ROUTES */
 
 // ADD ITEMS TO CURRENT USER
