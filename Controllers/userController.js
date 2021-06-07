@@ -57,7 +57,7 @@ exports.hideWelcome = (req, res, next) => {
     user.firstVisit = false;
     user.save((err) => {
       if (err) return next(err);
-      res.json(User);
+      res.json(user);
     });
   });
 };
