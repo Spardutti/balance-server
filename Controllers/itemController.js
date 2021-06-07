@@ -45,6 +45,7 @@ exports.getCurrentMonthYearData = (req, res, next) => {
     $and: [{ user: req.user, year, month }],
   })
     .populate("folder")
+    .sort({ day: -1 })
     .exec((err, items) => {
       if (err) return next(err);
       res.json(items);
