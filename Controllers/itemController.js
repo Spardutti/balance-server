@@ -8,6 +8,9 @@ exports.newItem = (req, res, next) => {
     price: req.body.price,
     user: req.user,
     folder: req.body.folder,
+    day: req.body.day,
+    month: req.body.month,
+    year: req.body.year,
   }).save((err, savedItem) => {
     if (err) return next(err);
     res.json(savedItem);
