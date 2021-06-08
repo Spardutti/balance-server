@@ -8,7 +8,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "http://localhost:5000/users/success",
+      callbackURL:
+        "https://infinite-woodland-48479.herokuapp.com/users/success",
     },
     (accessToken, refreshToken, profile, done) => {
       //CHECK IF USER EXIST
